@@ -7,68 +7,76 @@
 # 저 배열 중 가장 큰 숫자를 기준으로 한번만 소수를 찾고 그 소수를 배열에 넣은 다음 찾아쓰면 되는데?
 # 예를들어 16으로 한번 소수를 다 찾아 놓고 그 배열을 A라하면 10의 소수는 A중 10보다 작은 놈들이겠지.
 
-# 1. 소수를 구하는 함수를 만든다 0
-# number(ex. 10)보다 작은 소수들을 배열로 뱉는 함수를 만들 것.
-def return_p_number_list(number): #문제조건 상 number>2
-  prime_number_list = []
-  for n in range(2, number):
-    error = 0
-    # n이 소수인지 판별해야함.
-    if n ==2:
-      prime_number_list.append(n)
-    elif n%2==0:
-      None
-    else:
-      # n까지 소수가 몇개 있는지 판별
-      for itr_n in range(2, n):
-        if itr_n==2:
-          prime_number_list.append(n)
-        elif itr_n%2 ==0:
-          error = error +1
-        else:
-          if n%itr_n == 0:
-            error = error+ 1
-      if error ==0:
-        # n이 다 돌 때까지 전부다 나머지가 0이여야 소수인거임. 중간에 하나 안 나눠졌다고 소수로 봐주면 안됨
-        prime_number_list.append(n)
+# 입력된 숫자들 중 가장 큰 수를 찾는 로직 (0)
+# 그 숫자까지의 소수를 찾고 새로운 배열 A를 만드는 로직 (8이면 2 3 5 7) (0)
+# 다른 넘버의 소수도 A를 보고 찾는 로직 (0)
+# 골디바흐의 수 찾는 로직
+  # 두번 연속으로 더해서 10이나오면 그놈을 출력하고 (ex. 5+5)
+  # 그런 값이 없으면 3+7출력 하는데 둘 차이가 제일 적은놈 추출 (이게 생각보다 어렵네?)
 
-  out_put_list=[]
-  for prime_number in prime_number_list:
-    if prime_number ==None:
-      None
+def return_p_number_list(max_value):
+  prime_number_list = []
+  for value in range(2, max_value):
+    if value == 2:
+      prime_number_list.append(value)
+    elif value % 2 == 0:
+      pass
     else:
-      out_put_list.append(prime_number)
-  return out_put_list
+      # 9이 소수인지 판단하려면 3미만의 숫자로 3을 나눴을 때 나머지가 0이되는 숫자가 있는지 체크 -> 없으면 소수
+      error = 0
+      for itr_value in range(2, value): #value = 9
+        if value%itr_value == 0:
+          error = error+1
+          break
+      if error == 0:
+        prime_number_list.append(value)
+  return prime_number_list
+
+def quick_serarch(value, prime_number_list):
+  return_quick_search_list =[]
+  for i in range(len(prime_number_list)):
+    if prime_number_list[i] <= value: #value는 퀵서치할 숫자 ex. 6
+      return_quick_search_list.append(prime_number_list[i])
+  return return_quick_search_list
 
 Times = int(input())
-input_list=[]
+
+input_list = []
 for t in range(Times):
   number = int(input())
   input_list.append(number)
 
-output_list=[]
-for itr_input_list in input_list:
-  number = itr_input_list
-  goldi = []
-  for i in return_p_number_list(number):
-    if i+i == number:
-      goldi.append([i,i])
-      # break
-    else:
-      if (number - i) in return_p_number_list(number):
-        goldi.append([i, number-i])
-  
-  # 4
-  for itr_goldi in goldi:
-    if (itr_goldi[0] > itr_goldi[1]):
-      del(itr_goldi)
-    elif(itr_goldi[0] == itr_goldi[1]):
-        first_output = itr_goldi[0]
-        second_output = itr_goldi[1]
-    else:
-        first_output = itr_goldi[0]
-        second_output = itr_goldi[1]
-  output_list.append([first_output, second_output])
+# 최대값의 소수를 찾는 로직
+max_value  = max(input_list)
+prime_number_list = return_p_number_list(max_value)
 
-for itr_output_list in output_list:
-  print(itr_output_list[0], itr_output_list[1])
+# 이미 찾아진 소수를 활용해서 다른 숫자들의 소수를 찾는 로직
+# quick_serarch(14, prime_number_list)
+
+
+for itr_input_list in input_list:
+  prime_list = quick_serarch(itr_input_list, prime_number_list)
+  for n in prime_list:
+    if (n*2 == itr_input_list):
+      print(n,n)
+    else:
+      rest_n= itr_input_list - n
+      temp = []
+      if (rest_n in prime_list):
+        if n < rest_n:
+          temp.append([n, rest_n])
+      
+        
+      answer_list = []
+      for i in range(len(temp)):
+        diff = temp[i][0] - temp[i][1]
+        answer_list.append[[temp[i][0], temp[i][1], diff]]
+      
+      temp=[]
+      for i in range(len(answer_list)):
+        temp.append(answer_list[i][2])
+
+      min_diff = min(temp)
+      for i in range(len(answer_list)):
+        if (answer_list[i][2] == min_diff):
+          print(answer_list[i])
