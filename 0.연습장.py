@@ -1,7 +1,5 @@
-arr=[1,2,3]
-n = len(arr)
-mid = n//2
-left_arr = arr[:mid]
-right_arr = arr[mid:]
-
-print(left_arr, right_arr)
+arr = [1]
+arr_1 = [2]
+# arr[0] = 1
+arr = arr + arr_1[0: ]
+print(arr)
