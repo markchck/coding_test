@@ -1,6 +1,6 @@
 # https://www.acmicpc.net/problem/2750
 
-# 병합정렬 풀의법 (시간복잡도 n*logn )
+# 병합정렬 풀의법 (시간복잡도 n*logn )https://www.daleseo.com/sort-merge/ 참고
 
 #arr[:mid] -> 배열 슬라이싱을 활용해서 이렇게 단순하게 배열 반띵하기 완료. 
 #난 어케할라그랫냐면 len으로 배열의 길이 n을 구하고, n을 반으로 나누고 그걸 m(mid)이라하고(홀수일때를 대비해서 round처리)
