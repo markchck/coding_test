@@ -1,18 +1,13 @@
-# 8시 40분에 시작
+# set이라는 자료구조로 데이터를 잘 정리해놓고 그걸 불러내면 통과됨.
+# 이진탐색을 의도한 문제이지만 이런 관점으로도 문제를 풀 수 있다.
+
 N = int(input())
-A_list = sorted(list(map(int, input().split(" "))))
+A_list = set(map(int, input().split(" ")))
 M = int(input())
 B_list = list(map(int, input().split(" ")))
 
-mid = len(A_list)/2
-
-def half(itr_m, len):
-  if(len == 1):
-    return 
+for b in B_list:
+  if b in A_list:
+    print(1)
   else:
-    half(itr_m, len-1)
-    left_A = A_list[0:len]
-    right_A = A_list[len:]
-
-for irt_m in M:
-  half(irt_m, len(A_list))
+    print(0)
