@@ -1,12 +1,7 @@
-# 10시 37분에 시작 11시 37분에 마무리
+# import sys
+# a,b,c = map(int,sys.stdin.readline().split())
 
-N=int(input())
-A=set(map(int, input().split(" ")))
-M=int(input())
-B=map(int, input().split(" "))
+import sys
+a = list(map(int, sys.stdin.readline()))
 
-for itr_B in B:
-  if(itr_B in A):
-    print(1)
-  else:
-    print(0)
+print(a)
