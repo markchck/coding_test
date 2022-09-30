@@ -1,24 +1,13 @@
+# set이라는 자료구조로 데이터를 잘 정리해놓고 그걸 불러내면 통과됨.
+# 이진탐색을 의도한 문제이지만 이런 관점으로도 문제를 풀 수 있다.
+
 N = int(input())
-A = list(map(int,input().split(" ")))
+A_list = set(map(int, input().split(" ")))
 M = int(input())
-arr = list(map(int, input().split(" ")))
+B_list = list(map(int, input().split(" ")))
 
-A.sort() #A정렬
-
-for num in arr:
-  left, right = 0, N-1 #컴퓨터는 0부터 센다
-  isExist = False
-
-  # 이분탐색 시작
-  while left <= right:
-    mid = (left+right)//2 #지금까지 변수 설정만 했을 뿐 아무것도 한게 없음.
-    if num == A[mid]:
-      print(1)
-      isExist = True
-      break
-    elif (num > A[mid]):
-      left = mid +1 #와 이 부분이 왼쪽 버려네?
-    else: #num<A[mid]
-      right = mid-1
-  if isExist == False:
+for b in B_list:
+  if b in A_list:
+    print(1)
+  else:
     print(0)

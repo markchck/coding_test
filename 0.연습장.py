@@ -1,20 +1,12 @@
-def get_count(x,number):
-     count = 0
+# 10시 37분에 시작 11시 37분에 마무리
 
-     if number < 10:
-         change_number = number * 10 + number
-     else:
-         change_number = (number // 10) + (number % 10)
-         change_number = (number % 10) * 10 + (change_number % 10)
-     count += 1
+N=int(input())
+A=set(map(int, input().split(" ")))
+M=int(input())
+B=map(int, input().split(" "))
 
-     if x == change_number:
-         return count
-
-     return count + get_count(x,change_number)
-
-
-number = int(input())
-x = number
-
-print(get_count(x,number))
+for itr_B in B:
+  if(itr_B in A):
+    print(1)
+  else:
+    print(0)
