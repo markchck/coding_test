@@ -26,7 +26,7 @@ def cutting(min,max):
   print(max) 
 cutting(min,max)
 
-  # if(sum==M):   #내가짠 코드는 이 밑인데 반례줄게 N=2, M=2 나무크기 3, 2 
+  # if(sum==M):   #내가짠 코드는 이 밑인데 반례줄게 N=2, M=2 나무크기 3, 2 //이래도 mid가 2이고 3과 1도 mid가 2? 
   #   break
   # elif(sum>M):
   #   min = mid+1
