@@ -1,3 +1,4 @@
+# https://www.acmicpc.net/problem/1920
 # https://velog.io/@deannn/BOJ-백준-1920번-수-찾기-Python
 N = int(input())
 A = list(map(int,input().split(" ")))

@@ -1,3 +1,5 @@
+# https://www.acmicpc.net/problem/1920
+
 # 10시 37분에 시작 11시 37분에 마무리
 
 # hashset을 사용해서 가장 빠른시간에 문제 풀었음.(최적의 풀이임)

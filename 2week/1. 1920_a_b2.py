@@ -1,3 +1,5 @@
+# https://www.acmicpc.net/problem/1920
+
 # 내 최초 풀이법
 # 8시 40분에 시작
 # 10시에 답볼게 20분만 더..
