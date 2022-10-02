@@ -65,7 +65,7 @@ N = int(sys.stdin.readline().strip())
 command_l = []
 for _ in range(N):
   command_l.append(list((sys.stdin.readline().split())))
-
+print(command_l)
 
 stack = Stack(N)
 for itr_command_l in command_l:
