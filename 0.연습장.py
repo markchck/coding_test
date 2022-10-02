@@ -1,7 +1,4 @@
-# import sys
-# a,b,c = map(int,sys.stdin.readline().split())
-
-import sys
-a = list(map(int, sys.stdin.readline()))
-
-print(a)
+sum=0
+for i in range(4):
+  sum -= i
+print(sum)
