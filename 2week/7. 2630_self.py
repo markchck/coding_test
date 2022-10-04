@@ -1,43 +1,74 @@
+#입력 끝났고
 import sys
-global white, blue
-white =0
-blue = 0
+global w_count, b_count
+w_count = 0
+b_count = 0
 
-def main():
-  N = int(sys.stdin.readline().strip())
-  arr= [0]*N
-  for i in range(N):
-    arr[i] = (list(map(int, sys.stdin.readline().split(" "))))
-  
-  is_same(arr,N)
-  
+def main() ->None:
+    global w_count, b_count
+    n = int(sys.stdin.readline().strip())
+    arr=[0]*n
+    for i in range(n):
+        arr[i] = list(map(int, sys.stdin.readline().split(" ")))
+
+    is_same(arr, n)
+    print(w_count)
+    print(b_count)
+    
+# 자르는 함수 시작
+def paper_cut(arr, n) -> None:
+    global w_count, b_count
+    # 원소가 통일 되지 않은 2*2배열이 들어온 상태
+    if n ==2:
+        for row in arr:
+            for data in row:
+                if data == 0: w_count += 1
+                else: b_count += 1
+    else:
+        # 4개의 빈 종이 생성 0 왼쪽 상단, 1우측상단, 2좌측하단, 3우측 하단
+        part_0 = [[0 for _ in range(n//2)] for _ in range(n//2)]
+        part_1 = [[0 for _ in range(n//2)] for _ in range(n//2)]
+        part_2 = [[0 for _ in range(n//2)] for _ in range(n//2)]
+        part_3 = [[0 for _ in range(n//2)] for _ in range(n//2)]
+        
+        # 빈 종이에 값을 분할하기
+   
+        for i in range(0, n):
+            for j in range(0, n):
+                if i/(n//2) < 1 and j/(n//2) < 1:
+                    part_0[i%(n//2)][j%(n//2)] = arr[i][j]
+                elif i/(n//2) < 1 and j/(n//2) >= 1:
+                    part_1[i%(n//2)][j%(n//2)]= arr[i][j]
+                elif i/(n//2) >= 1 and j/(n//2) <1:
+                    part_2[i%(n//2)][j%(n//2)] = arr[i][j]
+                else:
+                    part_3[i%(n//2)][j%(n//2)] =arr[i][j]
+                    
+        is_same(part_0, n//2)
+        is_same(part_1, n//2)
+        is_same(part_2, n//2)
+        is_same(part_3, n//2)
 
 
-def cutting(arr,x,y, N) -> None:
-  part1 =[(0 for _ in (N/2)) for _ in (N/2)]
-  print(part1)
 
-def is_same(arr,N):
-  global white, blue
-  x=0
-  y=0
-  for row in arr:
-    for column in row:
-      # 만약 배열의 첫 기준점인 0,0과 다르면 쪼개고, 같으면 종이의 색깔을 판단해.
-      if row[column] != arr[x][y]:
-        cutting(arr,x,y,N)
-        break
-      else:
-        if arr[0][0]==0:
-          white = white + 1
+#판별하는 함수 시작
+def is_same(arr, n)->None:
+    global w_count, b_count
+    a = arr[0][0]
+    same = True
+
+    for row in arr:
+        for data in row:
+            if data != a:
+                same = False
+                break
+    if same == True:
+        if a == 0:
+            w_count += 1
         else:
-          blue = blue + 1
+            b_count += 1
+    else:
+        paper_cut(arr, n)
 
 
-main(arr,N)
-# # 이건 빠르긴 한데 파이썬에서밖에 못씀.
-# import sys
-# N= int(sys.stdin.readline().strip())
-# arr = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
-# print(arr)
-
+main()
