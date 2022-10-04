@@ -1,16 +1,27 @@
 import sys
-from heapq import heappush, heappop
-input = sys.stdin.readline
 
-heap = []
-for _ in range(int(input())):
+def main():
     n = int(input())
+    arr = list(map(int, sys.stdin.readline().split()))
+    arr.sort()
 
-    if n == 0:
-        if len(heap) == 0:
-            print(0)
+    lp = 0
+    rp = n-1
+    lastdata = [2000001048,lp,rp]
+
+    while lp < rp:
+        summed = arr[lp]+arr[rp]
+        if summed == 0:
+            print(arr[lp], arr[rp])
+            return
+        if abs(summed) < lastdata[0]:
+            lastdata[0], lastdata[1], lastdata[2] = abs(summed), lp, rp
+        if summed < 0:
+            lp += 1
         else:
-            result = heappop(heap)[-1]
-            print(result)
-    
-    heappush(heap, (-n, n))
+            rp -= 1
+
+    print(arr[lastdata[1]], arr[lastdata[2]])
+        
+
+main()
