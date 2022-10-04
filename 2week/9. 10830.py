@@ -22,7 +22,7 @@ def multiple(list_l, B):
     return matrix_mulitple(list_l, new_list)
   else:
     multiple(list_l, B-1)
-    matrix_mulitple(list_l, list_l) 
+    matrix_mulitple(list_l, list_l) #??
   return new_list
 
 def matrix_mulitple(list_l, new_list):
