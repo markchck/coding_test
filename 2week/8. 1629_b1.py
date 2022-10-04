@@ -49,22 +49,48 @@
 
 
 
-# 나머지 정리까지 활용했으나.. 그래도 시간초과네..ㅠㅠ b2에 다른 사람 풀이 가져와서 봐볼게
+# # 나머지 정리까지 활용했으나.. 그래도 시간초과네..ㅠㅠ b2에 다른 사람 풀이 가져와서 봐볼게
+# import sys
+
+# a,b,c=map(int, sys.stdin.readline().split())
+
+# def main(a,b,c):
+#   result =(multiple(a,b,c))%c
+#   print(result)
+#   # print(result)
+  
+# def multiple(a,b,c):
+#   if b==1:
+#     return a%c
+#   elif (b%2 == 0): #b가 짝수이면?
+#       return ((multiple(a,b//2,c)) * (multiple(a,b//2,c)))%c
+#   else: #홀수이면?
+#       return (multiple(a,(b//2),c) * multiple(a,(b//2),c) * multiple(a,(b%2),c))%c
+#     # return multiple(a, b-1) * a
+
+# main(a,b,c)
+
+
+
+
+# 자 b2풀이 보고왔음..내풀이에 적용시켜보겠음.
 import sys
 a,b,c=map(int, sys.stdin.readline().split())
 
-def main(a,b,c):
-  result =(multiple(a,b,c))%c
+def main(a,b):
+  result =(multiple(a,b))%c
   print(result)
   # print(result)
   
-def multiple(a,b,c):
+def multiple(a,b):
   if b==1:
     return a%c
-  elif (b%2 == 0): #b가 짝수이면?
-      return ((multiple(a,b//2,c)) * (multiple(a,b//2,c)))%c
-  else: #홀수이면?
-      return (multiple(a,(b//2),c) * multiple(a,(b//2),c) * multiple(a,(b%2),c))%c
-    # return multiple(a, b-1) * a
+  else:
+    tmp = multiple(a,b//2)
+    if (b%2 == 0): #b가 짝수이면?
+        return (tmp * tmp)%c
+    else: #홀수이면?
+        return (tmp * tmp * a)%c
+      # return multiple(a, b-1) * a
 
-main(a,b,c)
+main(a,b)
