@@ -1,7 +1,9 @@
 # https://www.acmicpc.net/problem/10830
-import sys
+
+import sys, copy
 N, B = map(int, sys.stdin.readline().split())
 list_l=[]
+
 new_list = []
 for _ in range(N):
   new_list.append([1,1])
@@ -11,21 +13,21 @@ def main():
   for _ in range(N):
     list_l.append(list(map(int, sys.stdin.readline().split())))
   
-  answer_list=multiple(list_l, B)
+  answer_list=multiple(list_l,new_list, B)
   print(answer_list)
 
 
-def multiple(list_l, B):
+def multiple(list_l, new_list, B):
   if B ==1:
     return list_l
   else:
-    multiple(list_l, B-1) #중간에 간섭이 생겨버리네?? 
-    new_list[0][0] = list_l[0][0] * ( list_l[0][0] + list_l[1][0]) #왼쪽 상단
-    new_list[0][1] = list_l[0][1] * ( list_l[0][1] + list_l[1][1]) #우측 상단
-    new_list[1][0] = list_l[1][0] * ( list_l[0][0] + list_l[1][0]) #좌측 하단
-    new_list[0][0] = list_l[0][0] * ( list_l[0][1] + list_l[1][1]) #우측 하단
-  return new_list
-
+    multiple(list_l, new_list, B-1) #중간에 간섭이 생겨버리네?? (얕은 복사라서 (포인터만 복사한거라서..) 원본이 바뀌면 둘 다 바뀌어버림. 깊은 복사를 해야함.)
+    new_list[0][0] = list_l[0][0] * list_l[0][0] + list_l[0][1]*list_l[1][0] #왼쪽 상단
+    new_list[0][1] = list_l[0][0] * list_l[0][1] + list_l[0][1]*list_l[1][1] #우측 상단
+    new_list[1][0] = list_l[1][0] * list_l[0][0] + list_l[1][1]*list_l[1][0] #좌측 하단
+    new_list[1][1] = list_l[1][0] * list_l[0][1] + list_l[1][1]*list_l[1][1] #우측 하단
+    list_l = copy.deepcopy(new_list)
+    return multiple(list_l, new_list, B-1)
 main()
 
 # 코드 이상해서 바꿀건데 혹시모르니 복사
