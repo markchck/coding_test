@@ -12,7 +12,7 @@ for i in range(len(s)):
     tmp = tmp*2
     stack.append(s[i])
   elif(s[i] == '['):
-    tmp = tmp*311
+    tmp = tmp*3
     stack.append(s[i])
   elif (s[i] == ')'):
     if not stack or stack[-1] == '[':
