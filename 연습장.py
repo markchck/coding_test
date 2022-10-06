@@ -1,4 +1,13 @@
-a= [ [1,2], [3,4]]
+import heapq
+A=heapq()
+A = [6,4,5,236,7,8]
 
-for itr_a in a:
-    print(*itr_a)
+heapq.heapify(A)
+heapq.heappop(A)
+heapq.heappush(A,3)
+print(A)
+
+# from collections import deque
+# A=deque()
+# A.append(1)
+# print(A)
