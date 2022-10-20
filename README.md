@@ -11,3 +11,5 @@ ex) 111_b1.py (여러 풀이중에 최우선 풀이법)
     111_a_b2.py (다른 풀이법 생각중)
     a
 
+https://docs.google.com/spreadsheets/d/1BF95IG0BOaqQQ56paKatJBmIIhHqDMU4pDDVxj__odA/edit#gid=1701326314
+
