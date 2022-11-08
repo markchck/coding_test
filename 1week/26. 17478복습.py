@@ -1,12 +1,14 @@
-# 올라가는 재귀 풀이
-# 변수를 2개 쓰는 이유
-N=int(input())
+# 어디서부터 어디가 재귀인가?
+# 올라가는 재귀인데 내려가는 재귀만 풀다가 올라가게 풀려니까 어렵네..
+# 둘 다 해봐야할 듯.. 
+N = int(input())
 print("어느 한 컴퓨터공학과 학생이 유명한 교수님을 찾아가 물었다.")
 def recursion(count):
-  if count==N:
-    print("____"*(count) + '"재귀함수가 뭔가요?"')
-    print("____"*(count) + '"재귀함수는 자기 자신을 호출하는 함수라네"')
-    print("____"*(count) + '라고 답변하였지.')
+  # if count == 0:
+  if count == N:
+    print("____"*(count)+'"재귀함수가 뭔가요?"')
+    print("____"*(count)+'"재귀함수는 자기 자신을 호출하는 함수라네"')
+    print("____"*(count)+'라고 답변하였지.')
   else:
     print("____"*(count)+'"재귀함수가 뭔가요?"')
     print("____"*(count)+'"잘 들어보게. 옛날옛날 한 산 꼭대기에 이세상 모든 지식을 통달한 선인이 있었어.')
@@ -14,6 +16,5 @@ def recursion(count):
     print("____"*(count)+'그의 답은 대부분 옳았다고 하네. 그런데 어느 날, 그 선인에게 한 선비가 찾아와서 물었어."')
     recursion(count+1)
     print("____"*(count)+"라고 답변하였지.")
-
-
+# recursion(N)
 recursion(0)

@@ -8,7 +8,7 @@ def is_prime(number):
     else:
         return True
 
-# 여러 숫자들 중 소수 판별기 (제곱근 활용)
+# 여러 숫자들 중 모든 소수 판별기 (제곱근 활용)
 def prime_search_1(numbers):
     prime_1=[]
     for num in numbers:
