@@ -1,27 +1,22 @@
-# 어디가 재귀이고 어디는 아닌지?
-# 재귀 중간에 재귀가 아닌애를 끼워 넣어야하고
-# 재귀랑 상관없이 출력된 숫자와 연관된 '____'처리를 해줘야함.
-N = int(input())
-print("어느 한 컴퓨터공학과 학생이 유명한 교수님을 찾아가 물었다.")
+import sys
+count = 0
 
-def recursion(count):
-  # if문 중단조건
-    # 중단시 출력되는 A구역
-  # else문 재귀 조건
-    # 스택을 쌓으면서 재귀도는 B구역
-    # 재귀들어가는 부분(증가식, 감소식)
-    # 스택을 없애면서 재귀도는 C구역
+def z(n,x,y):
+  global count
 
-  if count == N:
-    print('____'*(N) + '"재귀함수가 뭔가요?"')
-    print('____'*(N) +'"재귀함수는 자기 자신을 호출하는 함수라네"')
-    print('____'*(N) +'라고 답변하였지.')
+  if not(x <= r < x+n and y <= c <y+n):
+    count += n**2
+    return
+
+  if x == r and y ==c:
+    print(int(count))
+    return
+
   else:
-    print('____'*(count) + '"재귀함수가 뭔가요?"')
-    print('____'*(count) +'"잘 들어보게. 옛날옛날 한 산 꼭대기에 이세상 모든 지식을 통달한 선인이 있었어.')
-    print('____'*(count) +'마을 사람들은 모두 그 선인에게 수많은 질문을 했고, 모두 지혜롭게 대답해 주었지.')
-    print('____'*(count) +'그의 답은 대부분 옳았다고 하네. 그런데 어느 날, 그 선인에게 한 선비가 찾아와서 물었어."')
-    recursion(count + 1)
-    print('____'*(count) +'라고 답변하였지.')
+    z(n / 2, x, y)
+    z(n / 2, x, y + n / 2)
+    z(n / 2, x + n / 2, y)
+    z(n / 2, x + n / 2, y + n / 2)
 
-recursion(0)
+n, r, c = map(int, sys.stdin.readline().split(' '))
+z(2 ** n, 0, 0)
