@@ -1,0 +1,32 @@
+import sys
+from itertools import permutations, combinations
+input = sys.stdin.readline
+N = int(input())
+list_l = []
+
+for _ in range(N):
+    list_l.append(list(map(int, input().split())))
+# print(list_l) #[[0, 10, 15, 20], [5, 0, 9, 10], [6, 13, 0, 12], [8, 8, 9, 0]]
+
+list_N = []
+for i in range(N):
+    list_N.append(i)
+
+# list_n : 방문 도시들 경우의수 노가다
+list_N = list(permutations(list_N, N))
+# print(list_N) #[(0, 1, 2, 3), (0, 1, 3, 2), (0, 2, 1, 3), (0, 2, 3, 1), (0, 3, 1, 2), (0, 3, 2, 1), (1, 0, 2, 3), (1, 0, 3, 2), (1, 2, 0, 3), (1, 2, 3, 0), (1, 3, 0, 2), (1, 3, 2, 0), (2, 0, 1, 3), (2, 0, 3, 1), (2, 1, 0, 3), (2, 1, 3, 0), (2, 3, 0, 1), (2, 3, 1, 0), (3, 0, 1, 2), (3, 0, 2, 1), (3, 1, 0, 2), (3, 1, 2, 0), (3, 2, 0, 1), (3, 2, 1, 0)]
+
+for case in list_N:
+    case = list(case)
+    case.append(case[0])
+    #print(case) #[0, 1, 2, 3, 0], [0, 1, 3, 2, 0]
+
+# 방문 도시들 경우의 수 노가다 시키고 
+# 맨 뒤에 시작도시 끼워넣는 것까지 했고
+# 이제 경우의 수 노가다 한 것에 따라 도시들 방문 비용을 구하면 되는데 ...이게 어렵네
+
+    sum = 0
+    for j in range(N):
+        print(list_l[case[j]][case[j+1]])
+
+
