@@ -1,16 +1,28 @@
-import sys
-input = sys.stdin.readline
+from itertools import permutations
 
-N = int(input())
-word_list = []
 
-for i in range(N):
-    word = input().rstrip()
-    word_list.append(word)
+n = int(input())
+arr = []
 
-word_list = list(set(word_list))
-print(word_list)
+matrix = [list(map(int,input().split())) for _ in range(n)]
 
-word_list.sort(key = lambda x : (len(x), x) )
-for w in word_list:
-    print(w)
+answer = 100000000  
+
+# print(list(permutations(range(1,n), n-1)))
+for i in permutations(range(1,n), n-1):
+    # num_list =[]
+    # num_list.append(list(i))
+    num_list = [*i]
+    num_list = [0] + num_list + [0]
+    sub = 0
+
+    for j in range(n):
+        cost = matrix[num_list[j]-1][num_list[j+1]-1]
+        if cost == 0:
+            break
+        else:
+            sub = sub + cost
+print(sub)
+    
+    
+    
