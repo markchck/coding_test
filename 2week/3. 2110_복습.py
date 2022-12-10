@@ -10,28 +10,28 @@
 import sys
 input = sys.stdin.readline
 
-n, c = map(int, input().split())
-A_list = []
-for _ in range(n):
-  A_list.append(int(input()))
-
+N, C = map(int, input().split())
+A_list = [ int(input()) for _ in range(N) ]
 A_list.sort()
 
-max = A_list[-1] - A_list[0]
-min = 1
+def BOJ2110():
+  max = A_list[-1] - A_list[0]
+  min = 1
+  count = 1
 
-while not (min > max):
-  count =1
-  recent_house = A_list[0]
-  mid = (min+max)//2
-  for i in range(1, len(A_list)):
-    if A_list[i] - recent_house >= mid:
-      count +=1
-      recent_house = A_list[i]
+  while(min <= max):
+    count =1 
+    mid = (max+min)//2
+    house = A_list[0]
+    for i in range(1, len(A_list)):
+      if A_list[i] - house >= mid:
+        count +=1
+        house = A_list[i]
+    if count >= C:
+      result = mid
+      min = mid +1
+    else:
+      max = mid -1
+  print(result)
 
-  if count >= c:
-    result = mid
-    min = mid +1
-  else:
-    max = mid -1
-print(result)
+BOJ2110()
