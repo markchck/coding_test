@@ -1,24 +1,27 @@
+# 이거 유진이 풀이임 (투포인터로 푼것 이진탐색 ㄴㄴㄴ)
+
 import sys
+# sys.stdin = open("input.txt","r")
 input = sys.stdin.readline
+n = int(input())
+arr  = list(map(int,input().split()))
+arr.sort()
 
-N = int(input())
-arr = sorted(list(map(int, input().split())))
-
-#그냥 하도 이진탐색 로직이 국밥이니까 심지어 함수로 뺄정도라는 거임. 별거없음
-# idx, target만 무슨의미로 쓰인건지 아래 코드에서 확인하면 됨.
-def binary_search(idx, target): 
-    res = N-1
-    start, end = idx, N-1
-
-    while start <= end:
-        mid = (start+end) //2
-        if(arr[mid] >= target):
-            res = mid
-            end=mid-1
-        else:
-            start= mid+1
-    return res
-
-def solution():
-    for i in range(N):
-        res = binary_search(i+1, -arr[i])
+temp = [2000000000,0,0] # 가능한 결과의 최댓값과 그때의 인덱스 두 개 
+start = 0
+end = len(arr)-1
+while True:
+    check_value = arr[start]+ arr[end]
+    if abs(check_value) < temp[0] :
+        temp[0] = abs(check_value)
+        temp[1] = start
+        temp[2] = end
+    if check_value <0 :
+        start += 1
+    elif check_value ==0 :
+        break
+    else: 
+        end -= 1
+    if start>=end:
+        break
+print(arr[temp[1]], arr[temp[2]])
