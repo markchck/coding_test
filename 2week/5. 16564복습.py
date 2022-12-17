@@ -4,8 +4,8 @@ n,k = map(int, input().split())
 levels = [int(input()) for _ in range(n)]
 
 start = min(levels)
-# end = start +k
-end = 1000000000
+end = max(levels) +(k//n)
+# end = 1000000000
 res = 0
 
 while (start <= end):
