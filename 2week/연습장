@@ -1,6 +1,0 @@
-A_list = [1,2,3]
-
-print(A_list.index(2))
-
-A_list.pop(1) #n번째가 팝되네
-print(A_list)
