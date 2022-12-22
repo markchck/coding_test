@@ -35,6 +35,7 @@ def boj8983():
         index = binary(x)
         if index != (m-1): #동물이 두 사대 사이에 위치한 경우
             if (abs(shoot[index] - x) + y <= l) or (abs(shoot[index+1] - x ) + y <= l): #사정거리 안이라면?
+                
                 count +=1
         else: #동물이 하필 맨 끝 사대의 오른쪽에 있는 경우
             if (abs(shoot[index] - x) + y <= l):
