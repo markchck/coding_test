@@ -16,3 +16,4 @@ word_list.sort( key= lambda x :(len(x), x) )
 
 for w in word_list:
     print(w)
+

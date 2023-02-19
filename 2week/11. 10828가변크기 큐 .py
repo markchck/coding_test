@@ -6,6 +6,7 @@ queue = []
 
 def enqueue(item):
   queue.append(item)
+  
 def dequeue():
   global queue
   pop_left = queue[0]

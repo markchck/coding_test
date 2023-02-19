@@ -7,10 +7,12 @@ ptr = 0
 def push(value):
   global stk, ptr
   ptr = ptr+1
-  new_stk = [None]*ptr
-  new_stk[ptr -1] = value
-  new_stk = new_stk[len(new_stk)-1:]
-  stk = stk + new_stk
+  new_stak = [value]
+  stk = stk + new_stak
+  # new_stk = [None]*ptr
+  # new_stk[ptr -1] = value
+  # new_stk = new_stk[len(new_stk)-1:]
+  # stk = stk + new_stk
   return stk
 
 def pop():
