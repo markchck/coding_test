@@ -1,6 +1,8 @@
 # https://www.acmicpc.net/problem/9012
 # 2시 11분
 
+# 숫자로 +1 -1로 푸는건 정말 신박한 아이디어임!!
+
 import sys
 T = int(sys.stdin.readline().strip())
 

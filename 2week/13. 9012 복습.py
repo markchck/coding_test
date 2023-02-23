@@ -1,16 +1,54 @@
+# 짝수가 아니면 False
+# (개수랑 )개수가 안맞으면 False
+
+# 이걸 먼저 짜면 될 듯
+#()짝이 맞으면 Pop, 뭔가 남으면 False
+
+
 import sys
 input = sys.stdin.readline
-
-from collections import deque
-
-que = deque()
 N=int(input())
-for _ in range(N):
-    A = (input().split())
-    # 이거 어케하면 될 것 같냐면 길이만큼 반복문 돌면서 짝이 맞으면 pop해서 없애고 안 맞으면 False 전부다 pop되어서 없어지면 true
-    if (A[0] == A[-1]):
-        print("NO")
-    else:
-        print("YES")
 
-# print(que)
+for _ in range(N):
+    VPS=input().strip()
+    list_a=[]
+    for itr in VPS:
+        if itr == '(':
+            list_a.append(itr)
+        elif itr == ')':
+            #list_a에 (가 있는 경우
+            if len(list_a)>0:        
+                list_a.pop()
+            #list_a에 (가 없는 경우
+            elif len(list_a) == 0:
+                list_a.append(itr)
+                break
+    if len(list_a) == 0:
+        print('YES')  
+    else:
+        print('NO')
+
+
+
+# import sys
+# input = sys.stdin.readline
+# N=int(input())
+
+# for _ in range(N):
+#     VPS=input().strip()
+#     list_a=[]
+#     for itr in VPS:
+#         if itr == '(':
+#             list_a.append(itr)
+#         elif itr == ')':
+#             #list_a에 (가 있는 경우
+#             if len(list_a)>0:        
+#                 list_a.pop()
+#             #list_a에 (가 없는 경우
+#             elif len(list_a) == 0:
+#                 print('NO')
+#                 continue
+#     if len(list_a) == 0:
+#         print('YES')  
+#     else:
+#         print('NO')
