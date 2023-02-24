@@ -1,0 +1,30 @@
+def solution(S):
+    # Implement your solution here
+    
+    count = 0
+    order = S.find("BA")
+    while S.find("BA") >= 0:
+        order = S.find("BA")
+        S = S[0 : order] + S[order+2:len(S)]
+        count +=1
+    return count
+solution('BAAABAB')
+
+# def solution(A):
+#     # Implement your solution here
+#     length = len(A)
+#     list_a = [0] * length+1
+#     for itr in range(1,length+1):
+#         order=A[itr-1]
+#         list_a[order] = list_a[order] + 1
+    
+#     result = []
+#     for itr in range(1,length):
+#         if list_a[itr] == itr:
+#             result.append(itr)
+#     if len(result) == 0:
+#         return 0
+#     else:
+#         return result[-1]
+
+# solution([3, 8, 2, 3, 3, 2])
