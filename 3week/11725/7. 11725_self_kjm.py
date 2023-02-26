@@ -1,7 +1,7 @@
 # https://www.acmicpc.net/problem/11725
 
 import sys
-sys.stdin = open('input.txt','r')
+# sys.stdin = open('input.txt','r')
 input= sys.stdin.readline
 N=int(input())
 
