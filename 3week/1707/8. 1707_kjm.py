@@ -6,7 +6,7 @@ from collections import defaultdict
 import sys
 
 sys.setrecursionlimit(1000000)
-sys.stdin= open("input.txt")
+# sys.stdin= open("input.txt")
 input = sys.stdin.readline
 
 K = int(input())

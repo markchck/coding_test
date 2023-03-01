@@ -1,5 +1,5 @@
 import sys
-sys.stdin = open("8_input.txt","r")
+# sys.stdin = open("8_input.txt","r")
 
 def dfs(start, group) :
     visited[start] = group  # 노드에 group값을 주고
