@@ -14,7 +14,7 @@
 #         if heap:
 #            print(hq.heappop(heap)[1]) #맨앞에 수를 꺼내는데 value값을 꺼낸다 (-5,5)
 #         else:
-#             print(0)
+#            print(0)
 
 
 import sys
