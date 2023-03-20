@@ -22,7 +22,7 @@ class DoubleHasing:
                 self.d[postion] = data
                 self.N +=1
                 return
-            if self.a[postion] == key:
+            if self.a[postion] == key: #수정하는 상황
                 self.d[postion] = data
                 return
             else:
