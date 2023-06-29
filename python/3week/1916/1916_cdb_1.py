@@ -2,20 +2,21 @@
 
 import sys
 from heapq import heappush, heappop
-sys.stdin = open("1916/input.txt","r")
+# sys.stdin = open("1916/input.txt","r")
 input = sys.stdin.readline
 INF = int(1e9)
+
 
 def dijkstra(start, end):
     queue = []
     # 시작 노드로 가기 위한 최단 거리는 0으로 설정하여,큐에 삽입
-    heappush(queue, (0, start)) # 시작지점 힙에 추가
-    distance[start] = 0 # 시작 지점 0으로 초기화
-    
+    heappush(queue, (0, start))  # 시작지점 힙에 추가
+    distance[start] = 0  # 시작 지점 0으로 초기화
+
     while queue:
         # 가장 최단 거리가 짧은 노드에 대한 정보 꺼내기
         dist, now = heappop(queue)
-        
+
         # 이미 방문한 적 있는 도시이면 무시
         if distance[now] < dist:
             continue
