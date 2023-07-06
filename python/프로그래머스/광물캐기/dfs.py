@@ -23,22 +23,20 @@ def dfs(idx, d, ir, s, minerals, price):  # 상승식이든 하강식이든 idx�
         diaPrice += table[0][m[minerals[i]]]
         iroPrice += table[1][m[minerals[i]]]
         stoPrice += table[2][m[minerals[i]]]
-    if d > 0:
-        d -= 1
-        dfs(idx+5, d, ir, s, minerals, price + diaPrice)
-    if ir > 0:
-        ir -= 1
-        dfs(idx+5, d, ir, s, minerals, price + iroPrice)
-    if s > 0:
-        s -= 1
-        dfs(idx+5, d, ir, s, minerals, price + stoPrice)
+    if d:
+        dfs(idx+5, d-1, ir, s, minerals, price + diaPrice)
+    if ir:
+        dfs(idx+5, d, ir-1, s, minerals, price + iroPrice)
+    if s:
+        dfs(idx+5, d, ir, s-1, minerals, price + stoPrice)
 
 
 def solution(picks, minerals):
     global res
     dfs(0, picks[0], picks[1], picks[2], minerals, 0)
+    print(res)
     return res
 
 
-solution([1, 3, 2], ["diamond", "diamond", "diamond",
-         "iron", "iron", "diamond", "iron", "stone"])
+solution([1, 1, 0], ["stone", "stone", "iron", "stone", "diamond",
+         "diamond"])
