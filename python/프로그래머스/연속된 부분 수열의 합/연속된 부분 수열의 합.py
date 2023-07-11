@@ -1,38 +1,33 @@
 def solution(sequence, k):
+    sum, left, right = 0, 0, 0
     answer = []
-    li = list(map(int, sequence))
-    k = int(k)
-    length = len(li)
-    start_idx = 0
-    end_idx = 0
-    li_sum = 0
-
     while True:
-        if li_sum < k:
-            if end_idx >= length:
+        if sum < k:  # 부분합이 k가 되기엔 부족하니까 right를 오른쪽으로 옮겨서 부분합을 늘려줘야함.
+            if right > len(sequence)-1:  # right가 늘어날 수 있는 최대는 배열의 마지막 인덱스까지임
                 break
-            li_sum += li[end_idx]
-            end_idx += 1
+            # 정상적으로 right가 늘어도 되는 상황
+            sum += sequence[right]
+            right += 1
+            continue
 
-        elif li_sum > k:
-            # li_sum이 목표한 k 보다 크면 왼쪽을 줄여서 k와 맞춰야하겠지?
-            # 그런데 start_idx가 (왼쪽이) 이미 배열의 끝이라면 왼쪽을 더 줄일 수가 없다.
-            # startidx나 Endidx 둘 다 배열의 길이를 넘을 수는 없는거니까
-            # 그래서 break를 해준다.
-            if start_idx >= length - 1:
+        if sum == k:
+            answer.append([left, right-1])
+            # sum==k를 찾고 끝난게 아니라 다른 쌍을 또 찾아야하기 때문에 right를 늘려줘야함.
+            if right > len(sequence)-1:
                 break
-            li_sum -= li[start_idx]
-            start_idx += 1
+            sum += sequence[right]
+            right += 1
+            continue
 
-        elif li_sum == k:
-            answer.append([start_idx, end_idx - 1])
-            if end_idx >= length:
+        if sum > k:  # 부분합이 너무 길어져서 k보다 커진 상황. 부분합을 줄여야하기 때문에 left를 오른쪽으로 이동해야함.
+            if left > right:  # left는 right를 넘어설 수는 없다.
                 break
-            li_sum += li[end_idx]
-            end_idx += 1
+            sum -= sequence[left]
+            left += 1
+            continue
 
-    answer.sort(key=lambda x: (x[1] - x[0], x[0]))
+    answer.sort(key=lambda x: (x[1]-x[0]))
     return answer[0]
 
 
-solution([3], 3)
+solution([1, 1, 1, 2, 3, 4, 5], 5)
