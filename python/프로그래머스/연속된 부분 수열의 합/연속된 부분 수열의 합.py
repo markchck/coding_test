@@ -1,24 +1,38 @@
-# 왜 cnt -= sequence[left]를 하는지 이해 실패..
 def solution(sequence, k):
     answer = []
-    cnt, right = 0, 0
-    # 점점 증가하며 짧아질 left를 기점으로 순회한다
-    for left in range(len(sequence)):
-        # right는 기준 left로부터 오른쪽으로 조건을 넘지 않을만큼만 뻗어나간다
-        while right < len(sequence) and cnt < k:
-            cnt += sequence[right]
-            right += 1
-        # 조건에 부합했을 때 정답 계산
-        if cnt == k:
-            if len(answer) == 0:
-                answer = [left, right - 1]
-            else:
-                answer = answer if answer[1] - \
-                    answer[0] <= (right - 1) - left else [left, right - 1]
-        # 조건 부합 여부와 상관없이 좌측을 한칸 땡겨준다
-        cnt -= sequence[left]
+    li = list(map(int, sequence))
+    k = int(k)
+    length = len(li)
+    start_idx = 0
+    end_idx = 0
+    li_sum = 0
 
-    return answer
+    while True:
+        if li_sum < k:
+            if end_idx >= length:
+                break
+            li_sum += li[end_idx]
+            end_idx += 1
+
+        elif li_sum > k:
+            # li_sum이 목표한 k 보다 크면 왼쪽을 줄여서 k와 맞춰야하겠지?
+            # 그런데 start_idx가 (왼쪽이) 이미 배열의 끝이라면 왼쪽을 더 줄일 수가 없다.
+            # startidx나 Endidx 둘 다 배열의 길이를 넘을 수는 없는거니까
+            # 그래서 break를 해준다.
+            if start_idx >= length - 1:
+                break
+            li_sum -= li[start_idx]
+            start_idx += 1
+
+        elif li_sum == k:
+            answer.append([start_idx, end_idx - 1])
+            if end_idx >= length:
+                break
+            li_sum += li[end_idx]
+            end_idx += 1
+
+    answer.sort(key=lambda x: (x[1] - x[0], x[0]))
+    return answer[0]
 
 
-solution([1, 2, 3, 4, 5], 7)
+solution([3], 3)
