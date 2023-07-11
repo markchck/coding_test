@@ -24,19 +24,21 @@ def solution(plans):
             next_name = plans[ptr+1][0]
             next_time = plans[ptr+1][1]
             next_duration = plans[ptr+1][2]
-            if ((time+duration) > (next_time)): #중간에 멈춘 경우
+            if ((time+duration) > (next_time)):  # 중간에 멈춘 경우
                 # 750-740만큼을 수행했으니까 40에서 빼줌
                 waiting.append([name, duration - (next_time-time)])
                 ptr = ptr+1
-                
+
             else:
                 result.append(name)
-                plans = plans[0:ptr] + plans[ptr+1:]  #잘라내는 순간 기존의 배열의 인덱스와 바뀐 배열의 인덱스가 가리키는 놈이 달라져
-                left_time = next_time - time+duration 
+                # 잘라내는 순간 기존의 배열의 인덱스와 바뀐 배열의 인덱스가 가리키는 놈이 달라져
+                plans = plans[0:ptr] + plans[ptr+1:]
+                left_time = next_time - time+duration
                 if waiting:
-                    plans[0][1]=next_time #pop을 쓰지 않으니까 인덱스 관리하기가 힘들어진다. 불가능은 아닌 것 같은데 복잡도가 너무 올라가버림. 
+                    # pop을 쓰지 않으니까 인덱스 관리하기가 힘들어진다. 불가능은 아닌 것 같은데 복잡도가 너무 올라가버림.
+                    plans[0][1] = next_time
         else:
-            
+            pass
 
 
 solution([["science", "12:40", "50"], ["music", "12:20", "40"], [
