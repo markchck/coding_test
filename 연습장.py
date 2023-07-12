@@ -1,33 +1,39 @@
-def solution(sequence, k):
-    sum, left, right = 0, 0, 0
-    answer = []
-    while True:
-        if sum < k:  # 부분합이 k가 되기엔 부족하니까 right를 오른쪽으로 옮겨서 부분합을 늘려줘야함.
-            if right > len(sequence)-1:  # right가 늘어날 수 있는 최대는 배열의 마지막 인덱스까지임
-                break
-            # 정상적으로 right가 늘어도 되는 상황
-            sum += sequence[right]
-            right += 1
-            continue
+import sys
+from collections import deque
 
-        if sum == k:
-            answer.append([left, right-1])
-            # sum==k를 찾고 끝난게 아니라 다른 쌍을 또 찾아야하기 때문에 right를 늘려줘야함.
-            if right > len(sequence)-1:
-                break
-            sum += sequence[right]
-            right += 1
-            continue
+input = sys.stdin.readline
+n = int(input())
+connect = [[] for _ in range(n + 1)]  # 연결 정보
+needs = [[0] * (n + 1) for _ in range(n + 1)]  # 각 제품을 만들때 필요한 부품
+q = deque()  # 위상 정렬
+degree = [0] * (n + 1)  # 진입 차수
+for _ in range(int(input())):
+    a, b, c = map(int, input().split())
+    connect[b].append((a, c))
+    degree[a] += 1
 
-        if sum > k:  # 부분합이 너무 길어져서 k보다 커진 상황. 부분합을 줄여야하기 때문에 left를 오른쪽으로 이동해야함.
-            if left > right:  # left는 right를 넘어설 수는 없다.
-                break
-            sum -= sequence[left]
-            left += 1
-            continue
-
-    answer.sort(key=lambda x: (x[1]-x[0]))
-    return answer[0]
-
-
-solution([1, 1, 1, 2, 3, 4, 5], 5)
+for i in range(1, n + 1):
+    # 진입 차수가 0인걸 넣어준다.
+    if degree[i] == 0:
+        q.append(i)
+# 위상 정렬 시작
+while q:
+    now = q.popleft()
+    # 현 제품의 다음 단계 번호, 현 제품이 얼마나 필요한지
+    for next, next_need in connect[now]:
+        # 만약 현 제품이 기본 부품이면
+        if needs[now].count(0) == n + 1:
+            needs[next][now] += next_need
+        # 현 제품이 중간 부품이면
+        else:
+            for i in range(1, n + 1):
+                needs[next][i] += needs[now][i] * next_need
+        # 차수 -1
+        degree[next] -= 1
+        if degree[next] == 0:
+            # 차수 0이면 큐에 넣음
+            q.append(next)
+for x in enumerate(needs[n]):
+    if x[1] > 0:
+        print(*x)
+# print(needs)
