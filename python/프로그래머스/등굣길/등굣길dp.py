@@ -8,7 +8,7 @@ def solution(m, n, puddles):
             if [c, r] in puddles:
                 dp[r][c] = 0
             else:
-                dp[r][c] = dp[r-1][c] + dp[r][c-1]
+                dp[r][c] = (dp[r-1][c] + dp[r][c-1]) % 1000000007
     return print(dp[n][m])
 
 
