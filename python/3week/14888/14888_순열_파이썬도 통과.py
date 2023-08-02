@@ -16,7 +16,7 @@ for i in range(4):
 maxnum = -int(1e9)
 minnum = int(1e9)
 allCase = list(set(permutations(operations, N-1)))
-# total = numbers[0]
+
 for case in allCase:
     total = numbers[0]
     for i in range(1, N):

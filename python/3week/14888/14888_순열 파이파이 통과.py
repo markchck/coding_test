@@ -1,5 +1,5 @@
 # https://zu-techlog.tistory.com/62
-# pypy로 해야 통과됨.
+# 중복되는 경우를 제거 안해줘서 파이썬으로는 시간초과, pypy로 해야 통과됨.
 from itertools import permutations
 n = int(input())
 number = list(map(int, input().split()))
