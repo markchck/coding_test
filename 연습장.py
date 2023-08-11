@@ -1,31 +1,58 @@
-import heapq
+import sys
+input = sys.stdin.readline
+N, M = map(int, input().split())
+items = []
+for _ in range(N):
+    items.append(list(map(int, input().split())))
+
+dr = [-1, 1, 0, 0]
+dc = [0, 0, -1, 1]
 
 
-def solution(n, costs):
-    nodes = [[] for _ in range(n)]
-    visited = [0] * (n)
-    # 관계를 설정하고
-    for cost in costs:
-        start, end, cost = cost
-        nodes[start].append((cost, end))
-        nodes[end].append((cost, start))
-
-    # [[(1, 1), (2, 2)], [(1, 0), (5, 2), (1, 3)], [(2, 0), (5, 1), (8, 3)], [(1, 1), (8, 2)], []]
-    que = nodes[0]
-    visited[0] = 1
-    heapq.heapify(que)
-    count = 0
-    answer = 0
-    while que and count <= n:
-        cost, city = heapq.heappop(que)
-        if visited[city] == 0:
-            visited[city] = 1
-            count += 1
-            answer += cost
-            for next_cities in nodes[city]:
-                heapq.heappush(que, next_cities)
-    # print(answer)
-    return answer
+def dfs(row, col):
+    stack = []
+    stack.append((row, col))
+    while stack:
+        r, c = stack.pop()
+        if items[r][c] > 0 and visited[r][c] == 0:
+            visited[r][c] = 1
+            iceCount = 0
+            for i in range(4):
+                new_r = r+dr[i]
+                new_c = c+dc[i]
+                if visited[new_r][new_c] == 0:
+                    if items[new_r][new_c] <= 0:
+                        iceCount += 1
+                    else:
+                        stack.append((new_r, new_c))
+            items[r][c] -= iceCount
+            if items[r][c] <= 0:
+                ice[(r, c)] = 0
 
 
-solution(4, [[0, 1, 1], [0, 2, 2], [1, 2, 5], [1, 3, 1], [2, 3, 8]])
+ice = {}
+for i in range(1, N-1):
+    for j in range(1, M-1):
+        if items[i][j] != 0:
+            ice[(i, j)] = 1
+
+year = 0
+while sum(ice.values()) > 0:
+    dfs_count = 1
+    visited = [[0] * M for _ in range(N)]
+    for key, value in ice.items():
+        row, col = key
+        if visited[row][col] == 0 and value != 0:
+            if dfs_count == 2:
+                print(year)
+                break
+            else:
+                if visited[row][col] == 0 and items[row][col] != 0:
+                    dfs(row, col)
+                    dfs_count += 1
+    else:
+        year += 1
+        continue
+    break
+else:
+    print(0)
