@@ -1,20 +1,14 @@
-# import sys
-# input = sys.stdin.readline
-# N, K = map(int, input().split())
+from collections import deque
+import sys
+input = sys.stdin.readline
 
-# result = []
-# for i in range(1, N+1):
-#     result.append(i)
-
-# answer=[]
-# while len(result)!=0:
-#     left=len(result)
-#     if left >= K:
-#         pop=result[K-1]
-#         answer.append(pop)
-#         result = result[:(left-1)] + result[left:]
-#     else:
-#         pop=result[left%K -1]
-    
-# print(answer)
-
+n, k = map(int, input().split())
+ans = []
+q = deque(i for i in range(1, n+1))
+while q:
+    for i in range(k-1):
+        q.append(q.popleft())
+    ans.append(q.popleft())
+print('<', end='')
+print(*ans, sep=', ', end='')
+print('>')
