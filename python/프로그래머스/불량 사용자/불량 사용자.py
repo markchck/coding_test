@@ -55,5 +55,5 @@ solution(["frodo", "fradi", "crodo", "abc123", "frodoc"],
 #     print(answer)
 
 
-# solution(["frodo", "fradi", "crodo", "abc123", "frodoc"],
-#          ["fr*d*", "*rodo", "******", "******"])
+solution(["frodo", "fradi", "crodo", "abc123", "frodoc"],
+         ["fr*d*", "*rodo", "******", "******"])

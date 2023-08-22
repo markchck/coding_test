@@ -1,15 +1,33 @@
-def solution(sticker):
-    answer = 0
-    size= len(sticker)
-    if(size == 1):
-        return sticker.pop()
-    dp1 = [0] + sticker[:-1]
-    for i in range(2, size):
-        dp1[i] = max(dp1[i]+dp1[i-2], dp1[i-1])
-    
-    dp2 = [0] + sticker[1:]
-    for i in range(2, size):
-        dp2[i] = max(dp2[i]+dp2[i-2], dp2[i-1])
-    
-    answer = max(dp1[-1], dp2[-1])
-    return answer
+import sys
+import heapq
+input = sys.stdin.readline
+N = int(input())
+items = []
+
+for _ in range(N):
+    items.append(list(map(int, input().split())))
+
+D = int(input())
+
+roads = []
+for item in items:
+    house, office = item
+    if abs(house-office) <= D:
+        item.sort()
+        roads.append(item)
+roads.sort(key=lambda x: x[1])  # office를 기준으로
+
+answer = 0
+heap = []
+for road in roads:
+    if not heap:
+        heapq.heappush(heap, road)
+    else:
+        atLeast = road[1] - D
+        while heap[0][0] < atLeast:
+            heapq.heappop(heap)
+            if not heap:
+                break
+        heapq.heappush(heap, road)
+    answer = max(answer, len(heap))
+print(answer)
