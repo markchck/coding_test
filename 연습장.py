@@ -1,47 +1,11 @@
-def solution(s, skip, index):
-    alpa = {
-        0: 'a',
-        1: 'b',
-        2: 'c',
-        3: 'd',
-        4: 'e',
-        5: 'f',
-        6: 'g',
-        7: 'h',
-        8: 'i',
-        9: 'j',
-        10: 'k',
-        11: 'l',
-        12: 'm',
-        13: 'n',
-        14: 'o',
-        15: 'p',
-        16: 'q',
-        17: 'r',
-        18: 's',
-        19: 't',
-        20: 'u',
-        21: 'v',
-        22: 'w',
-        23: 'x',
-        24: 'y',
-        25: 'z'
-    }
-    result = ''
-    for char in s:
-        startIdx = list(alpa.values()).index(str(char))
-
-        reset = index
-        while index:
-            index -= 1
-            after_start = (startIdx+1) % 26
-            if alpa[after_start] in skip:
-                index += 1
-            startIdx = after_start
-        index = reset
-        result += alpa[startIdx % 26]
-    print(result)
-    return result
+import random
 
 
-solution("ybcde", "az", 1)
+def solution(number, k):
+    digit = 1000000
+    lower = 4300
+    ran = str(random.randint(lower, lower+1))
+    print(ran)
+
+
+solution(1, 2)
