@@ -1,23 +1,22 @@
+# https://www.acmicpc.net/problem/15649
 import sys
 input = sys.stdin.readline
-N, K = map(int, input().split())
-items = str(input().strip())
-items = list(items)
-stack = []
-count = 0
-for i, item in enumerate(items):
-    while stack and count != K:
-        lastItem = stack[-1]
-        if item > lastItem:
-            stack.pop()
-            count += 1
-        else:
-            break
-    stack.append(item)
-print(stack)
-if len(stack) != N-K:
-    for i in range(K):
-        stack.pop()
-# while len(stack) > N-K:
-#     stack.pop()
-print(''.join(stack))
+
+N, M = map(int, input().split())
+sys.setrecursionlimit(10**5)
+
+
+def recursion(i):
+    for j in range(1, N+1):
+        items.append(i)
+        if j != i:
+            items.append(j)
+            if len(items) == M:
+                return print(items)
+            recursion(j)
+
+
+answer = []
+items = []
+for i in range(1, N+1):
+    recursion(i)
