@@ -15,6 +15,7 @@ min_result = int(1e9)
 def recursion(add, sub, mul, div, sum, idx):
     global max_result, min_result
     if idx == N:
+        print(sum)
         max_result = max(max_result, sum)
         min_result = min(min_result, sum)
         return
