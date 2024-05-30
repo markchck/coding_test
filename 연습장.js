@@ -1,52 +1,47 @@
-class Node{
-    constructor(value){
-        this.value = value;
-        this.next = null;
+table = {
+    "dia": {
+        "diamond": 1,
+        "iron": 1,
+        "stone": 1
+    },
+    "iron": {
+        "diamond": 5,
+        "iron": 1,
+        "stone": 1
+    },
+    "stone": {
+        "diamond": 25,
+        "iron": 5,
+        "stone": 1
     }
 }
+res = 98765434232
 
-class Stack{
-    constructor(){
-        this.top = null;
-    }
-    push(value) {
-        let node = new Node(value);
-        node.next = this.top;
-        this.top = node;
-    }
-    pop(){
-        let tmp = this.top.value;
-        this.top = this.top.next;
-        return tmp
-    }
-    contain(value){
-        let current=this.top
-        while(current.next !== null){
-            if(current.value === value){
-                return true;
-            }else{
-                current = current.next;
-            }
-        }
-        return false;
-    }
+def dfs(idx, d, ir, s, minerals, price):
+if(d ==0 and ir ==0 and s==0 or idx>=len(minerals)):
+    global res
+    res = min(res, price)
+    return
+else:
+    diaPrice = 0
+    iroPrice = 0
+    stoPrice = 0
+    for i in range(idx, min((idx+5), len(minerals))):
+        diaPrice += table["dia"][minerals[i]]
+        iroPrice += table["iron"][minerals[i]]
+        stoPrice += table["stone"][minerals[i]]
+    if d:
+        dfs(idx+5, d-1, ir, s, minerals, price+diaPrice)
+    if ir:
+        dfs(idx+5, d, ir-1, s, minerals, price + iroPrice)
+    if s:
+        dfs(idx+5, d, ir, s-1, minerals, price + stoPrice)
+        
 
-    print(){
-        let current=this.top
-        while (current.next !== null){
-            console.log(current.value);
-            current = current.next;
-        }
-        console.log(current.value);
-    }
-}
+def solution(picks, minerals):
+global res
+dfs(0,picks[0], picks[1], picks[2], minerals, 0)
+return res
 
-let stack = new Stack();
-stack.push(1)
-stack.push(2)
-stack.push(3)
-stack.push(4)
-stack.push(5)
-stack.pop()
-console.log(stack.contain(5));
-stack.print()
+
+    

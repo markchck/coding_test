@@ -1,46 +1,48 @@
-import sys
-from collections import deque
-# sys.setrecursionlimit(10**6)#재귀 최대 깊이 설정
 
-input = sys.stdin.readline
-MAX = 100001
-n, k = map(int, input().split())
-dq = deque()
-dist = [-1]*MAX
-route = [-1]*MAX
+table = {
+    "dia": {
+        "diamond": 1,
+        "iron": 1,
+        "stone": 1
+    },
+    "iron": {
+        "diamond": 5,
+        "iron": 1,
+        "stone": 1
+    },
+    "stone": {
+        "diamond": 25,
+        "iron": 5,
+        "stone": 1
+    }
 
-
-def track(o, d):
-    routes = []
-    dest = k
-    routes.append(k)
-    while dest != o:
-        routes.append(route[dest])
-        dest = route[dest]
-    routes.reverse()
-    print(' '.join(map(str, routes)))
+}
 
 
-'''
-#역추적 방법2) 재귀
-def track(o,d):
-    if o!=d:
-        track(o,route[d])
-        print(d,end=' ')
-    else:
-        print(o,end=' ')
-'''
-dist[n] = 0  # 초기 위치(수빈's)
-route[n] = n
-dq.append(n)
-while dq:
-    x = dq.popleft()
-    if x == k:  # 도착
-        print(dist[k])
-        track(n, k)
-        break
-    for nx in [x+1, x-1, 2*x]:  # 가능한 3가지 행동
-        if 0 <= nx < MAX and dist[nx] == -1:
-            dist[nx] = dist[x]+1
-            route[nx] = x  # 이전 정점이 무엇이었는지 기록
-            dq.append(nx)
+def mining(tool, diaNum, ironNum, stoneNum, leftMinerals, result):
+
+    count = 0
+    while (count < 5 and len(leftMinerals) > 0):
+        count += 1
+        item = leftMinerals.pop(0)
+        result += table.tool.item
+    return result
+
+
+def solution(picks, minerals):
+    global table
+
+    result = 0
+    while (True):
+        if (sum(picks) == 0 or not minerals):
+            return result
+        else:
+            diaNum, ironNum, stoneNum = picks
+            # 순서가 무작위인 점을 고려해야해! (백트레킹 필요하다)
+
+            if (diaNum > 0):
+                mining("dia", diaNum - 1, ironNum, stoneNum, minerals, result)
+            if (ironNum > 0):
+                mining("iron", diaNum, ironNum-1, stoneNum, minerals, result)
+            if (stoneNum > 0):
+                mining("stone", diaNum, ironNum, stoneNum-1, minerals, result)
