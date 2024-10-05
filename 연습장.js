@@ -1,47 +1,58 @@
-table = {
-    "dia": {
-        "diamond": 1,
-        "iron": 1,
-        "stone": 1
+import sys
+table=  {
+    "dia":{
+        "diamond" : 1,
+        "iron" :1,
+        "stone" : 1
     },
-    "iron": {
-        "diamond": 5,
-        "iron": 1,
-        "stone": 1
+    "iron":{
+        "diamond":5,
+        "iron":1,
+        "stone":1
     },
-    "stone": {
-        "diamond": 25,
-        "iron": 5,
-        "stone": 1
+    "stone":{
+        "diamond":25,
+        "iron":5,
+        "stone":1
     }
 }
-res = 98765434232
-
-def dfs(idx, d, ir, s, minerals, price):
-if(d ==0 and ir ==0 and s==0 or idx>=len(minerals)):
-    global res
-    res = min(res, price)
-    return
-else:
-    diaPrice = 0
-    iroPrice = 0
-    stoPrice = 0
-    for i in range(idx, min((idx+5), len(minerals))):
-        diaPrice += table["dia"][minerals[i]]
-        iroPrice += table["iron"][minerals[i]]
-        stoPrice += table["stone"][minerals[i]]
-    if d:
-        dfs(idx+5, d-1, ir, s, minerals, price+diaPrice)
-    if ir:
-        dfs(idx+5, d, ir-1, s, minerals, price + iroPrice)
-    if s:
-        dfs(idx+5, d, ir, s-1, minerals, price + stoPrice)
-        
-
-def solution(picks, minerals):
-global res
-dfs(0,picks[0], picks[1], picks[2], minerals, 0)
-return res
-
-
+answer = 0
+def calculate(tool,minerals, tiredness):
+    for(i=0; i < min(len(minerals), 5), i++){
+        if(tool=="dia"):
+            tiredness += table[tool[minerals[i]]]
+        if(tool=="iron"):
+            tiredness += table[tool[minerals[i]]]
+        if(tool=="stone"):
+            tiredness += table[tool[minerals[i]]]
+    }
+    if(len(minerals) < 5):
+        minerals = []
+    else:
+        minerals= minerals[5:]
+    return (minerals, tiredness)
     
+    
+        
+def recursion(d,i,s, minerals, tiredness ):
+    global answer
+    left=len(minerals)
+    if(sum(d,i,s) == 0 or left == 0):
+        answer = min(answer, tiredness)
+        return
+    else:
+        if(d>0):
+            newMinerals, newTiredness= calculate("dia", minerals, tiredness)
+            recursion(d-1, i, s, newMinerals, newTiredness )
+        if(i>0):
+            newMinerals, newTiredness= calculate("iron", minerals, tiredness)
+            recursion(d, i-1, s, newMinerals, newTiredness )
+        if(s>0):
+            newMinerals, newTiredness= calculate("stone", minerals, tiredness)
+            recursion(d, i, s-1, newMinerals, newTiredness )
+    
+        
+def solution(picks, minerals):
+    d,i,s=picks
+    recursion(d,i,s, minerals, 0)
+    return answer

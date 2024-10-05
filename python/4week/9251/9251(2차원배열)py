@@ -1,35 +1,37 @@
 import sys
 input = sys.stdin.readline
-first, second =input().strip(), input().strip()
-len_first,len_second=len(first), len(second) #6
+first, second = input().strip(), input().strip()
+len_first, len_second = len(first), len(second)  # 6
 
 result = [[0]*(len_second+1) for _ in range(len_first+1)]
 
 for i in range(1, len_first+1):
     for j in range(1, len_second+1):
         if first[i-1] == second[j-1]:
-            result[i][j] = result[i-1][j-1] +1
+            result[i][j] = result[i-1][j-1] + 1
+
         else:
             result[i][j] = max(result[i-1][j], result[i][j-1])
 
-answer=[]
+answer = []
 print(result[-1][-1])
 
 
-
-# LCS 배열 탐색까지 
-def recursion(i,j):
+# LCS 배열 탐색까지
+def recursion(i, j):
     if result[i][j] == 0:
         return
     else:
         if (result[i-1][j] == result[i][j] and result[i][j-1] == result[i][j]):
-            recursion(i-1,j)
-        elif (result[i-1][j] ==result[i][j] and result[i][j-1] != result[i][j]):
-            recursion(i-1,j)
-        elif (result[i][j-1] == result[i][j] and result[i-1][j] !=result[i][j]):
-            recursion(i,j-1)
+            recursion(i-1, j)
+        elif (result[i-1][j] == result[i][j] and result[i][j-1] != result[i][j]):
+            recursion(i-1, j)
+        elif (result[i][j-1] == result[i][j] and result[i-1][j] != result[i][j]):
+            recursion(i, j-1)
         else:
             answer.append(first[(i-1)])
-            recursion(i-1,j-1)
+            recursion(i-1, j-1)
         return answer
+
+
 print(recursion(len_first, len_second))

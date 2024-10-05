@@ -1,48 +1,28 @@
+def solution(triangle):
+    row = len(triangle)
+    dp = []
+    # for i in range(row):
+    #     col = len(triangle[i])
+    #     for j in range(col):
+    #         dp.append([0] * (col))
+    # print(dp)
+    for i in range(row):
+        col = len(triangle[i])
+        dp.append([-99999999999999] * (col))
 
-table = {
-    "dia": {
-        "diamond": 1,
-        "iron": 1,
-        "stone": 1
-    },
-    "iron": {
-        "diamond": 5,
-        "iron": 1,
-        "stone": 1
-    },
-    "stone": {
-        "diamond": 25,
-        "iron": 5,
-        "stone": 1
-    }
+    dp[0][0] = triangle[0][0]
 
-}
+    for i in range(1, row):
+        col = len(triangle[i])
+        for j in range(col):
+            if j == 0:  # 맨 왼쪽
+                dp[i][j] = dp[i-1][j] + triangle[i][j]
+            elif j+1 == col:  # 맨 오른쪽
+                dp[i][j] = dp[i-1][j-1] + triangle[i][j]
+            else:  # 중간
+                dp[i][j] = max(dp[i-1][j-1], dp[i-1][j]) + triangle[i][j]
 
-
-def mining(tool, diaNum, ironNum, stoneNum, leftMinerals, result):
-
-    count = 0
-    while (count < 5 and len(leftMinerals) > 0):
-        count += 1
-        item = leftMinerals.pop(0)
-        result += table.tool.item
-    return result
+    return max(dp[row-1])
 
 
-def solution(picks, minerals):
-    global table
-
-    result = 0
-    while (True):
-        if (sum(picks) == 0 or not minerals):
-            return result
-        else:
-            diaNum, ironNum, stoneNum = picks
-            # 순서가 무작위인 점을 고려해야해! (백트레킹 필요하다)
-
-            if (diaNum > 0):
-                mining("dia", diaNum - 1, ironNum, stoneNum, minerals, result)
-            if (ironNum > 0):
-                mining("iron", diaNum, ironNum-1, stoneNum, minerals, result)
-            if (stoneNum > 0):
-                mining("stone", diaNum, ironNum, stoneNum-1, minerals, result)
+solution([[7], [3, 8], [8, 1, 0], [2, 7, 4, 4], [4, 5, 2, 6, 5]])
