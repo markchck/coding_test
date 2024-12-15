@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
-public class 최소비용구하기 {
+public class 최소비용구하기_다익스트라 {
     public static void main(String[] args) {
         //dfs, bfs, dp, 다익스트라, 플루이드워셜, 이진탐색, 백트래킹, 스택
         //시간이 0.5초로 매우 타이트함(완전 탐색류 제외) bfs, dfs(백트래킹), dp(플루이드워셜) / 1000 * 100000 = 1억 (1초 예상됨)
