@@ -1,56 +1,33 @@
-import sys
-input = sys.stdin.readline
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+        self.before = None
 
 
-class Stack:
+class LinkedList:
     def __init__(self):
-        self.stack = []
+        self.head = None  # 포인터 같은 느낌
 
-    def push(self, number):
-        self.stack.append(number)
+    def add(self, value):
+        newNode = Node(value)
+        # 최초에는 None을 복사하기 때문에 참조가 아닌 value가 복사되지만 이후 노드들은 self.head = newNode를 거치면서 참조가 복사된다.
+        newNode.before = self.head
+        self.head = newNode
+        newNode.next = self.head
 
-    def top(self):
-        if not self.stack:
-            print(-1)
-        else:
-            print(self.stack[-1])
+    def remove(self):
+        self.head = self.head.before
 
-    def size(self):
-        print(len(self.stack))
+    # n번째 인덱스에 value 삽입
+    def insertValue(self, n, value):
+        pass
 
-    def empty(self):
-        if not self.stack:
-            print(1)
-        else:
-            print(0)
+    def contins(self, value):
+        pass
 
-    def pop(self):
-        if self.stack:
-            print(self.stack.pop())
-        else:
-            print(-1)
+    def size():
+        pass
 
-
-def main():
-    N = int(input())
-    stack = Stack()
-
-    for _ in range(N):
-        chunk = input().split()
-        order = chunk[0]
-
-        if order == "push":
-            number = int(chunk[1])
-            stack.push(number)
-        elif order == "top":
-            stack.top()
-        elif order == "size":
-            stack.size()
-        elif order == "empty":
-            stack.empty()
-        elif order == "pop":
-            stack.pop()
-
-
-if __name__ == "__main__":
-    main()
+    def isEmpty():
+        pass
